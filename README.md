@@ -1,59 +1,79 @@
 # Earth Age — Dark-Mode Geochronology Explorer
 
-A single-page, **dark-mode** data explorer presenting physical, genomic, and
-chronometric arguments for an Earth roughly **6,000 years old (or less)**.
-Built from a Tailwind + Chart.js HTML page and wrapped so it deploys on
-**GitHub Pages** using a **Jekyll theme** (currently `jekyll-theme-cayman`).
+**Empirical Evidence for a Short-Timescale Earth** — a dark-mode, single-page
+data explorer that lays out why physical, genomic, and chronometric
+measurements fit a planet only **~6,000 years old (or less)**.
 
-## What's in here
+🔗 **Live site:** https://nate-mina.github.io/EARTHAGE/
 
-| File | Purpose |
-|------|---------|
-| `index.html` | The page itself (dark mode + graphic "tips" infocards). Wrapped in `{% raw %}` so Jekyll passes the markup through untouched. |
-| `_config.yml` | Jekyll / GitHub Pages config — sets the theme and metadata. |
-| `Gemfile` | Ruby dependency pin for local builds and GitHub Pages. |
-| `README.md` | This file. |
+---
 
-## Deploy to GitHub Pages (the easy way)
+## What the site argues
 
-1. Create a new repo on GitHub (e.g. `earth-age`).
-2. Push these files to the **default branch** (`main`):
-   ```bash
-   git init
-   git add .
-   git commit -m "Add dark-mode earth-age explorer"
-   git branch -M main
-   git remote add origin git@github.com:YOURNAME/earth-age.git
-   git push -u origin main
-   ```
-3. On GitHub: **Settings → Pages → Build and deployment → Source: Deploy from a branch → Branch: main / (root)**.
-4. Wait ~1 minute, then visit `https://YOURNAME.github.io/earth-age/`.
+The page is built around one claim: current "deep time" dating assumptions
+break down under physical measurement, and the same numbers keep landing on a
+young age. It's organized as five quick-read graphics plus deeper sections,
+each backed by cited research.
 
-GitHub Pages runs Jekyll automatically, applies the Cayman theme, and serves
-your `index.html`. No build step required on your machine.
+### The five "quick tips" (shareable graphics)
 
-## Change the Jekyll theme
+1. **Zircon Helium Won't Stay** — Helium leaks out of the Fenton Hill zircons
+   fast. If Earth were 1.5 billion years old, **0% should remain** — yet
+   **58%** is still there. That only fits a ~6,000-year clock.
+2. **C-14 in "Ancient" Diamonds** — Carbon-14 decays away in ~100,000 years,
+   yet it shows up **inside diamonds** claimed to be 1–3 billion years old.
+3. **Dating Clocks Disagree** — Same Grand Canyon rock, four methods, ages off
+   by **hundreds of millions of years**. Settled dating would make them match.
+4. **Soft Tissue in Dino Bone** — *Science* (2005) found flexible blood
+   vessels in *T. rex* bone. Organic matter can't survive 65+ million years,
+   but fits thousands.
+5. **Magnetic Field Is Fading** — Earth's field decays ~5%/century. Go back
+   only ~6,000–10,000 years and it would have been impossibly strong — a
+   young-Earth signature.
 
-Edit `theme:` in `_config.yml`. Gem-based themes you can use out of the box
-on GitHub Pages include:
+> **Bottom line (from the page):** helium, C-14, discordant clocks, soft
+> tissue, and the magnetic field all converge on the same number — an Earth
+> roughly **6,000 years old, or less.**
 
-- `jekyll-theme-cayman`  (current — clean, single column) **← recommended for this layout**
-- `jekyll-theme-minimal`
-- `jekyll-theme-leap-day`
-- `jekyll-theme-merlot`
-- `jekyll-theme-midnight`  (dark background — also a good fit for dark mode)
-- `jekyll-theme-slate`     (dark, documentation-style)
-- `jekyll-theme-tactile`
-- `jekyll-theme-architect`
-- `jekyll-theme-primer`
+### The deeper sections
 
-> Note: because `index.html` is a standalone `layout: none` page, the Cayman
-> (or other) theme's default styling is *not* injected into the content — it
-> only affects 404/auto-generated pages. The page carries its own dark styling,
-> so it looks the same on every theme. Cayman is chosen so the site's default
-> favicon/header stay consistent with a single-page project.
+- **Physical Anomalies — The Zircon Helium "Leaky Clock"** — the 58% paradox
+  and a diffusion age of ~6,000 years (vs. a 100,000× error in the
+  deep-time prediction), shown in an interactive chart.
+- **Catastrophic Plate Tectonics (CPT)** — runaway subduction, continental
+  megasequences, and oceanic heat sinks as mechanisms for rapid, global
+  deposition.
+- **Tandem Repeats & Genetic Entropy** — non-coding "junk DNA" that actually
+  functions as regulatory tuning knobs, structural anchors, and adaptive
+  switches, pointing to engineered design and genetic decay.
+- **The Carbon Reservoir Illusion** — how a pre-flood biosphere and stronger
+  magnetic field dilute the C-14 ratio, making a 6,000-year sample *look*
+  far older (with a live slider simulation).
+- **Comprehensive Research Library** — 11 cited sources (RATE project,
+  Baumgardner, Snelling, Vardiman, Humphreys, Austin, Schweitzer, Clarey,
+  Tomkins, and more).
 
-## Build locally (optional)
+### Design
+
+- **Dark / light toggle** — defaults to dark mode (near-black `#0c0a09` background, amber accents) with a sun/moon button in the nav that flips to a warm-paper light theme; the choice is remembered in `localStorage`.
+- All five tip graphics are **inline SVG** — no image files to host.
+- Tailwind + Chart.js loaded from CDNs; the page carries its own styling and
+  uses `layout: none`, so no Jekyll theme is needed.
+
+---
+
+## Install / build options
+
+The site is a single static `index.html`. You don't need to build anything to
+view it — just open the file or visit the live URL above. The options below
+are only if you want to host or modify it yourself.
+
+### Option A — Just view it (no install)
+
+Open `index.html` in any browser, or visit the live GitHub Pages site:
+https://nate-mina.github.io/EARTHAGE/
+
+### Option B — Run locally with Jekyll
 
 ```bash
 bundle install
@@ -61,11 +81,30 @@ bundle exec jekyll serve
 # open http://localhost:4000
 ```
 
-## Notes
+### Option C — Deploy your own GitHub Pages (GitHub Actions)
 
-- The page loads Tailwind and Chart.js from CDNs, so it needs internet access
-  when viewed.
-- All five "tip" graphics are inline SVG — no image files to host.
-- Content authored by Nathaniel Mina; presented as a research synthesis.
+1. Fork/clone this repo and push to your `main` branch.
+2. In your repo: **Settings → Pages → Build and deployment → Source:
+   GitHub Actions**.
+3. The `Deploy Jekyll site to Pages` workflow in
+   `.github/workflows/jekyll.yml` builds and deploys automatically on push
+   (~1 min). Watch it with:
+   ```bash
+   gh run list --repo <you>/<repo>
+   gh run watch <run-id> --repo <you>/<repo>
+   ```
+
+### Files
+
+| File | Purpose |
+|------|---------|
+| `index.html` | The page itself (dark mode + tip graphics). Wrapped in `{% raw %}` so Jekyll passes the markup through untouched. |
+| `_config.yml` | Jekyll/GitHub Pages config — metadata + `jekyll-feed`. No `theme:` (self-styled). |
+| `Gemfile` | Bare `jekyll` dependency for local + Actions builds. |
+| `.github/workflows/jekyll.yml` | GitHub Actions build & deploy workflow. |
+| `README.md` | This file. |
+
+Content authored by **Nathaniel Mina** (mechanical engineering, RIT);
+presented as a research synthesis.
 
 MIT No Attribution — reuse freely.
