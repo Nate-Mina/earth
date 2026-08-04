@@ -40,6 +40,10 @@ jobs:
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v6
+        with:
+          # Auto-enable GitHub Pages (source = GitHub Actions) on first run,
+          # since a brand-new repo has no Pages site yet and the GET 404s.
+          enablement: true
 
       - name: Build with Jekyll
         # Outputs to the './_site' directory by default
